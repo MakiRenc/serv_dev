@@ -2,8 +2,7 @@
 
 return [
 
-	'~^hello/(.*)$~' => [\MyProject\Controllers\MainController::class, 'sayHello'],
-	'~^bye/(.*)$~' => [\MyProject\Controllers\MainController::class, 'sayBye'],
+	'~^aboutMe$~' => [\MyProject\Controllers\MainController::class, 'aboutMe'],
 
 	'~^$~' => [\MyProject\Controllers\MainController::class, 'main'],
 
@@ -11,4 +10,5 @@ return [
 
 	'~^articles/(\d+)/edit$~' => [\MyProject\Controllers\ArticlesController::class, 'edit'],
 	'~^articles/add$~' => [\MyProject\Controllers\ArticlesController::class, 'add'],
+	'~^articles/(\d+)/delete$~' => [\MyProject\Controllers\ArticlesController::class, 'deleteA'],
 ];

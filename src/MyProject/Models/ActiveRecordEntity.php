@@ -63,9 +63,9 @@ abstract class ActiveRecordEntity
 		$params2values = [];
 		$index = 1;
 		foreach ($mappedProperties as $column => $value) {
-			$param = ':param' . $index; // :param1
-			$columns2params[] = $column . ' = ' . $param; // column1 = :param1
-			$params2values[$param] = $value; // [:param1 => value1]
+			$param = ':param' . $index;
+			$columns2params[] = $column . ' = ' . $param;
+			$params2values[$param] = $value;
 			$index++;
 		}
 

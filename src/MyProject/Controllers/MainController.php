@@ -1,24 +1,13 @@
 <?php
 
-
-
 namespace MyProject\Controllers;
 
-
-
 use MyProject\Models\Articles\Article;
-
 use MyProject\View\View;
 
-
-
 class MainController
-
 {
-
 	private $view;
-
-
 
 	public function __construct()
 
@@ -28,14 +17,15 @@ class MainController
 	}
 
 	public function main()
-
 	{
-
 		$articles = Article::findAll();
-
 		// var_dump($articles);
 		// die();
-
 		$this->view->renderHtml('main/main.php', ['articles' => $articles]);
+	}
+
+	public function aboutMe()
+	{
+		$this->view->renderHtml('main/aboutMe.php');
 	}
 }

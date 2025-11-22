@@ -31,14 +31,19 @@ class ArticlesController
 	public function edit(int $articleId): void
 	{
 		/** @var Article $article */
+
 		$article = Article::getById($articleId);
-		if ($article === null) {
-			$this->view->renderHtml('errors/404.php', [], 404);
-			return;
+
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+			$article->setName($_POST['name'] ?? $article->getName());
+			$article->setText($_POST['text'] ?? $article->getText());
+
+			$article->save();
+
+			header('Location: /articles/' . $article->getId());
+			exit;
 		}
-		$article->setName('Новое название статьи');
-		$article->setText('Новый текст статьи');
-		$article->save();
 	}
 
 	public function add(): void
@@ -50,5 +55,13 @@ class ArticlesController
 		$article->setText('Новый текст статьи');
 		$article->save();
 		var_dump($article);
+	}
+
+	public function deleteA(int $articleId): void
+	{
+		/** @var Article $article */
+		$article = Article::getById($articleId);
+		$article->delete();
+		header('Location: /www/');
 	}
 }

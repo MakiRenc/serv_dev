@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?= $pageTitle ?? 'Мой блог' ?></title>
-	<link rel="stylesheet" href="../Styles/styles.css">
+	<link rel="stylesheet" href="/Styles/styles.css">
 </head>
 
 <body>
