@@ -23,4 +23,41 @@
 	</form>
 <?php endif; ?>
 
+<h1>Комментарии</h1>
+
+<?php if (!isset($_GET['editC'])): ?>
+
+	<a href="/articles/<?= $article->getId() ?>?editC=1">
+		<button type="button">Прокомментировать</button>
+	</a>
+<?php else: ?>
+	<form action="/articles/<?= $article->getId() ?>/comments" method="post">
+		<div>
+			<label for="text">Оставьте Ваш комментарий</label><br>
+			<textarea id="text" name="text" rows="10" cols="80"></textarea>
+		</div>
+		<button type="submit">Сохранить</button>
+	</form>
+<?php endif; ?>
+
+<?php foreach ($comments as $comment): ?>
+	<div id="comment<?= $comment->getId() ?>" class="comment">
+		<p><?= ($comment->getText()) ?></p>
+		<p>Автор: <?= $comment->getUser()->getNickname() ?></p>
+		<p>Дата: <?= $comment->getCreatedAt() ?></p>
+
+		<a href="?editComment=<?= $comment->getId() ?>">Редактировать</a>
+
+		<?php if (isset($_GET['editComment']) && (int)$_GET['editComment'] === $comment->getId()): ?>
+
+			<form action="/comments/<?= $comment->getId() ?>/edit" method="post" style="margin-top:10px;">
+				<input type="text" name="text" value="<?= htmlspecialchars($comment->getText()) ?>" style="width: 80%;">
+				<button type="submit">Сохранить</button>
+			</form>
+
+		<?php endif; ?>
+		<hr>
+	</div>
+<?php endforeach; ?>
+
 <?php include __DIR__ . '/../footer.php'; ?>

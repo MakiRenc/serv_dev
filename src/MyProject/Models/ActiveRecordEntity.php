@@ -32,6 +32,16 @@ abstract class ActiveRecordEntity
 
 	abstract protected static function getTableName(): string;
 
+	public static function findCom(int $id): array
+	{
+		$db = Db::getInstance();
+		return $db->query(
+			'SELECT * FROM `' . static::getTableName() . '` WHERE article_id = :id;',
+			[':id' => $id],
+			static::class
+		);
+	}
+
 	public static function getById(int $id): ?self
 	{
 		$db = Db::getInstance();
@@ -56,6 +66,7 @@ abstract class ActiveRecordEntity
 			$this->insert($mappedProperties);
 		}
 	}
+
 
 	private function update(array $mappedProperties): void
 	{
@@ -93,6 +104,8 @@ abstract class ActiveRecordEntity
 		$sql = 'INSERT INTO ' . static::getTableName() . ' (' . $columnsViaSemicolon . ') VALUES (' . $paramsNamesViaSemicolon . ');';
 		$db = Db::getInstance();
 		$db->query($sql, $params2values, static::class);
+
+		$this->id = $db->getPdo()->lastInsertId();
 	}
 
 	private function mapPropertiesToDbFormat(): array

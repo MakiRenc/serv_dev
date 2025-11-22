@@ -3,7 +3,6 @@
 namespace MyProject\View;
 
 class View
-
 {
 	private $templatesPath;
 

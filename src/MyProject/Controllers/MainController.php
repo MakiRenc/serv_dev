@@ -3,6 +3,7 @@
 namespace MyProject\Controllers;
 
 use MyProject\Models\Articles\Article;
+use MyProject\Models\Comments\Comments;
 use MyProject\View\View;
 
 class MainController
