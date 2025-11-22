@@ -2,17 +2,25 @@
 
 namespace MyProject\Models\Users;
 
-class User
-{
-    private $name;
+use MyProject\Models\ActiveRecordEntity;
 
-    public function __construct(string $name)
+class User extends ActiveRecordEntity
+{
+    protected $nickname;
+    protected $email;
+    protected $isConfirmed;
+    protected $role;
+    protected $passwordHash;
+    protected $authToken;
+    protected $createdAt;
+
+    public function getNickname(): string
     {
-        $this->name = $name;
+        return $this->nickname;
     }
 
-    public function getName(): string
+    protected static function getTableName(): string
     {
-        return $this->name;
+        return 'users';
     }
 }
